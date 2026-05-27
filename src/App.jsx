@@ -94,6 +94,9 @@ export default function DropshippingStoreStarter() {
 
 
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [cart, setCart] = useState([]);
+const [showCart, setShowCart] = useState(false);
+const [checkoutOpen, setCheckoutOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState("");
   const [quantity, setQuantity] = useState(1);
   const [zoom, setZoom] = useState(false);
@@ -106,11 +109,33 @@ const [start, setStart] = useState({ x: 0, y: 0 });
 
 // Pinch zoom
 const [lastDistance, setLastDistance] = useState(null);
-
+const total = cart.reduce((acc, item) => {
+  return acc + parseInt(item.price.replace(/\D/g, "")) * item.quantity;
+}, 0);
   return (
     <div className="min-h-screen bg-black text-white">
+    {/* NAVBAR */}
+<div className="fixed top-0 left-0 w-full z-50 bg-black/70 backdrop-blur border-b border-zinc-800 px-6 py-4 flex items-center justify-between">
+
+  <h1 className="text-2xl font-black">
+    NextDrive™
+  </h1>
+
+  <button
+    onClick={() => setShowCart(true)}
+    className="relative bg-zinc-900 px-5 py-3 rounded-2xl border border-zinc-700"
+  >
+    🛒
+
+    {cart.length > 0 && (
+      <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-6 h-6 rounded-full flex items-center justify-center font-bold">
+        {cart.length}
+      </span>
+    )}
+  </button>
+</div>
       {/* HERO */}
-      <section className="relative h-[100vh] flex items-center justify-center overflow-hidden">
+      <section className="relative h-[100vh] pt-24 flex items-center justify-center overflow-hidden">
         <img
           src="https://images.unsplash.com/photo-1567808291548-fc3ee04dbcf0?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           alt="carro"
@@ -126,14 +151,24 @@ const [lastDistance, setLastDistance] = useState(null);
             Productos virales para transformar tu carro.
           </p>
 
-          <button className="bg-white text-black px-8 py-4 rounded-2xl font-bold text-lg hover:scale-105 transition">
-            Comprar ahora
-          </button>
+          <button
+  onClick={() => {
+    document
+      .getElementById("productos")
+      ?.scrollIntoView({ behavior: "smooth" });
+  }}
+  className="bg-white text-black px-8 py-4 rounded-2xl font-bold text-lg hover:scale-105 transition"
+>
+  Ver productos
+</button>
         </div>
       </section>
 
       {/* PRODUCTS */}
-      <section className="py-20 px-6 max-w-7xl mx-auto">
+      <section
+  id="productos"
+  className="py-20 px-6 max-w-7xl mx-auto"
+>
         <div className="flex items-center justify-between mb-10">
           <h2 className="text-4xl font-black">Productos</h2>
 
@@ -386,10 +421,37 @@ const [lastDistance, setLastDistance] = useState(null);
               </div>
 
               <div className="flex flex-col md:flex-row gap-4">
-                <button className="bg-gradient-to-r from-white to-zinc-300 text-black px-8 py-4 rounded-2xl font-black text-lg hover:scale-105 transition w-full">
-                  Comprar ahora
-                </button>
+                <button
+  onClick={() => {
+    setCart((prev) => {
+      const existing = prev.find(
+        (item) => item.id === selectedProduct.id
+      );
 
+      if (existing) {
+        return prev.map((item) =>
+          item.id === selectedProduct.id
+            ? {
+                ...item,
+                quantity: item.quantity + 1,
+              }
+            : item
+        );
+      }
+
+      return [
+        ...prev,
+        {
+          ...selectedProduct,
+          quantity: 1,
+        },
+      ];
+    });
+  }}
+  className="bg-gradient-to-r from-white to-zinc-300 text-black px-8 py-4 rounded-2xl font-black text-lg hover:scale-105 transition w-full"
+>
+  Agregar al carrito
+</button>
                 <button
                   onClick={() => setSelectedProduct(null)}
                   className="bg-zinc-800 px-8 py-4 rounded-2xl font-black text-lg hover:bg-zinc-700 transition"
@@ -438,7 +500,247 @@ const [lastDistance, setLastDistance] = useState(null);
           </div>
         </div>
       </section>
+{/* CART */}
+{showCart && (
+  <div className="fixed inset-0 bg-black/80 z-[200] flex items-center justify-center p-4">
+    
+    <div className="bg-zinc-950 border border-zinc-800 rounded-3xl w-full max-w-2xl p-6 max-h-[90vh] overflow-y-auto">
+      
+      <div className="flex items-center justify-between mb-6">
+        <h2 className="text-3xl font-black">
+          Tu carrito
+        </h2>
 
+        <button
+          onClick={() => setShowCart(false)}
+          className="text-3xl"
+        >
+          ×
+        </button>
+      </div>
+
+      {cart.length === 0 ? (
+        <p className="text-zinc-400">
+          Tu carrito está vacío.
+        </p>
+      ) : (
+        <>
+          <div className="space-y-4">
+            {cart.map((item, index) => (
+              <div
+                key={index}
+                className="flex items-center gap-4 bg-zinc-900 p-4 rounded-2xl"
+              >
+                <img
+                  src={item.image}
+                  className="w-24 h-24 object-contain bg-black rounded-xl"
+                />
+
+                <div className="flex-1">
+                  <h3 className="font-bold text-lg">
+                    {item.name}
+                  </h3>
+
+                  <div>
+  <p className="text-zinc-400">
+    {item.price}
+  </p>
+
+  <p className="text-zinc-500">
+    Cantidad: {item.quantity}
+  </p>
+</div>
+                </div>
+
+                <button
+                  onClick={() => {
+                    const updated = [...cart];
+                    updated.splice(index, 1);
+                    setCart(updated);
+                  }}
+                  className="bg-red-500 px-4 py-2 rounded-xl"
+                >
+                  Eliminar
+                </button>
+              </div>
+            ))}
+          </div>
+
+          <button
+  onClick={() => {
+    setCheckoutOpen(true);
+  }}
+  className="w-full mt-6 bg-white text-black py-4 rounded-2xl font-black text-lg"
+>
+  Continuar al pago
+</button>
+        </>
+      )}
+    </div>
+  </div>
+)}
+{/* CHECKOUT */}
+{checkoutOpen && (
+  <div className="fixed inset-0 bg-black/90 z-[300] overflow-y-auto p-4">
+
+    <div className="max-w-3xl mx-auto bg-zinc-950 border border-zinc-800 rounded-3xl p-6 md:p-10">
+
+      <div className="flex items-center justify-between mb-8">
+        <h2 className="text-4xl font-black">
+          Checkout
+        </h2>
+
+        <button
+          onClick={() => setCheckoutOpen(false)}
+          className="text-3xl"
+        >
+          ×
+        </button>
+      </div>
+
+      <div className="space-y-6">
+
+        <input
+          placeholder="Nombre completo"
+          className="w-full bg-zinc-900 border border-zinc-700 rounded-2xl p-4"
+        />
+
+        <input
+          placeholder="Número de teléfono"
+          className="w-full bg-zinc-900 border border-zinc-700 rounded-2xl p-4"
+        />
+
+        <input
+          placeholder="Código postal"
+          className="w-full bg-zinc-900 border border-zinc-700 rounded-2xl p-4"
+        />
+
+        <input
+          placeholder="Estado"
+          className="w-full bg-zinc-900 border border-zinc-700 rounded-2xl p-4"
+        />
+
+        <input
+          placeholder="Ciudad"
+          className="w-full bg-zinc-900 border border-zinc-700 rounded-2xl p-4"
+        />
+
+        <input
+          placeholder="Colonia"
+          className="w-full bg-zinc-900 border border-zinc-700 rounded-2xl p-4"
+        />
+
+        <input
+          placeholder="Calle y número"
+          className="w-full bg-zinc-900 border border-zinc-700 rounded-2xl p-4"
+        />
+
+        <input
+          placeholder="RFC o CURP"
+          className="w-full bg-zinc-900 border border-zinc-700 rounded-2xl p-4"
+        />
+
+        {/* PAGOS */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+  <button className="bg-zinc-900 border border-zinc-700 p-5 rounded-2xl hover:border-white transition text-left">
+    <div className="text-xl font-bold">
+      PayPal
+    </div>
+
+    <p className="text-zinc-400 text-sm mt-1">
+      Pago rápido y seguro
+    </p>
+  </button>
+
+  <button className="bg-zinc-900 border border-zinc-700 p-5 rounded-2xl hover:border-white transition text-left">
+    <div className="text-xl font-bold">
+      Añadir una tarjeta nueva
+    </div>
+
+    <p className="text-zinc-400 text-sm mt-1">
+      Visa, Mastercard, AMEX
+    </p>
+  </button>
+
+  <button className="bg-zinc-900 border border-zinc-700 p-5 rounded-2xl hover:border-white transition text-left">
+    <div className="text-xl font-bold">
+      Mercado Pago
+    </div>
+
+    <p className="text-zinc-400 text-sm mt-1">
+      Paga con saldo o tarjeta
+    </p>
+  </button>
+
+  <button className="bg-zinc-900 border border-zinc-700 p-5 rounded-2xl hover:border-white transition text-left">
+    <div className="text-xl font-bold">
+      OXXO Pay
+    </div>
+
+    <p className="text-zinc-400 text-sm mt-1">
+      Paga en efectivo en OXXO
+    </p>
+  </button>
+
+  <button className="bg-zinc-900 border border-zinc-700 p-5 rounded-2xl hover:border-white transition text-left md:col-span-2">
+    <div className="text-xl font-bold">
+      Google Pay
+    </div>
+
+    <p className="text-zinc-400 text-sm mt-1">
+      Pago rápido desde Android
+    </p>
+  </button>
+
+</div>
+<div className="mt-8 space-y-4">
+
+  <input
+    placeholder="Número de tarjeta"
+    className="w-full bg-zinc-900 border border-zinc-700 rounded-2xl p-4"
+  />
+
+  <div className="grid grid-cols-2 gap-4">
+
+    <input
+      placeholder="MM/AA"
+      className="w-full bg-zinc-900 border border-zinc-700 rounded-2xl p-4"
+    />
+
+    <input
+      placeholder="CVV"
+      className="w-full bg-zinc-900 border border-zinc-700 rounded-2xl p-4"
+    />
+
+  </div>
+
+  <input
+    placeholder="Nombre del titular"
+    className="w-full bg-zinc-900 border border-zinc-700 rounded-2xl p-4"
+  />
+
+</div>
+        <div className="flex items-center justify-between mt-10 text-3xl font-black">
+          <span>Total:</span>
+
+          <span>${total} MXN</span>
+        </div>
+
+        <a
+          href={`https://wa.me/5213320354661?text=Hola,%20quiero%20hacer%20un%20pedido%20de:%20${cart
+            .map((item) => `${item.name} x${item.quantity}`)
+            .join(", ")}`}
+          target="_blank"
+          className="block text-center bg-green-500 text-white py-5 rounded-2xl font-black text-xl hover:scale-105 transition"
+        >
+          Confirmar pedido por WhatsApp
+        </a>
+
+      </div>
+    </div>
+  </div>
+)}
       {/* FOOTER */}
       <footer className="py-10 border-t border-zinc-800 text-center text-zinc-500">
         © 2026 NextDrive™ / By TemplaShop.
