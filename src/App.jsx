@@ -73,15 +73,15 @@ export default function DropshippingStoreStarter() {
   {
       id: 4,
       name: "LED + Pedales combo kit",
-      price: "$299 MXN",
+      price: "$399 MXN",
 
       fit: "contain",
 
-      image: "/combokit.png",
+      image: "/combokit.jpg",
         
 
       gallery: [
-        "/combokit.png", 
+        "/combokit.jpg", 
         
       ],
 
@@ -94,7 +94,7 @@ export default function DropshippingStoreStarter() {
      {
       id: 5,
       name: "Kit de lavado para auto",
-      price: "$399 MXN",
+      price: "$299 MXN",
 
       fit: "contain",
 
@@ -119,6 +119,7 @@ export default function DropshippingStoreStarter() {
   const [cart, setCart] = useState([]);
 const [showCart, setShowCart] = useState(false);
 const [checkoutOpen, setCheckoutOpen] = useState(false);
+const [showAdded, setShowAdded] = useState(false);
 const [paymentMethod, setPaymentMethod] = useState("paypal");
   const [selectedImage, setSelectedImage] = useState("");
   const [quantity, setQuantity] = useState(1);
@@ -447,6 +448,11 @@ const total = cart.reduce((acc, item) => {
                 <button
   onClick={() => {
     setCart((prev) => {
+      setShowAdded(true);
+
+setTimeout(() => {
+  setShowAdded(false);
+}, 2500);
       const existing = prev.find(
         (item) => item.id === selectedProduct.id
       );
@@ -861,11 +867,17 @@ MXN
           target="_blank"
           className="block text-center bg-green-500 text-white py-5 rounded-2xl font-black text-xl hover:scale-105 transition"
         >
-          Confirmar pedido por WhatsApp
+          Confirmar pedido por WhatsApp. Enviaremos un mensaje con los detalles de tu pedido para coordinar la entrega y el pago.
         </a>
 
       </div>
     </div>
+  </div>
+)}
+{/* NOTIFICATION */}
+{showAdded && (
+  <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[500] bg-white text-black px-6 py-4 rounded-2xl shadow-2xl font-bold animate-bounce">
+    ✅ Producto agregado al carrito
   </div>
 )}
       {/* FOOTER */}
