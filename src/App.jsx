@@ -187,9 +187,27 @@ const total = cart.reduce((acc, item) => {
             NEXT LEVEL CAR ACCESSORIES
           </h1>
 
-          <p className="text-zinc-300 text-lg md:text-xl mb-8">
-            Productos virales para transformar tu carro.
-          </p>
+          <div className="flex items-center justify-center gap-3 mb-8">
+
+  <a
+    href="https://instagram.com/TUUSUARIO"
+    target="_blank"
+    className="bg-zinc-900 border border-zinc-800 px-4 py-2 rounded-xl text-sm hover:bg-zinc-800 transition flex items-center gap-2"
+  >
+    <span>📸</span>
+    Instagram
+  </a>
+
+  <a
+    href="https://tiktok.com/@TUUSUARIO"
+    target="_blank"
+    className="bg-zinc-900 border border-zinc-800 px-4 py-2 rounded-xl text-sm hover:bg-zinc-800 transition flex items-center gap-2"
+  >
+    <span>🎵</span>
+    TikTok
+  </a>
+
+</div>
 
           <button
   onClick={() => {
@@ -517,7 +535,7 @@ setTimeout(() => {
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-zinc-900 p-8 rounded-3xl border border-zinc-800">
+            <div className="bg-zinc-900 px-6 py-4 rounded-2xl">
               <div className="text-5xl font-black mb-4">1</div>
               <h3 className="text-2xl font-bold mb-2">Elige</h3>
               <p className="text-zinc-400">
