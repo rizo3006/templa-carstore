@@ -146,19 +146,6 @@ const total = cart.reduce((acc, item) => {
   <h1 className="text-2xl font-black">
     NextDrive™
   </h1>
-
-  <a
-    href="https://tiktok.com/@jlrizo45"
-    className="bg-white/10 border border-zinc-700 px-4 py-2 rounded-xl hover:border-white transition text-sm font-semibold"
-  >
-    TikTok ↗
-  </a>
-<a
-    href="https://www.instagram.com/its_templa?igsh=anNpdnlsNnJ3eTFh&utm_source=qr"
-    className="bg-white/10 border border-zinc-700 px-4 py-2 rounded-xl hover:border-white transition text-sm font-semibold"
-  >
-    Instagram ↗
-  </a>
 </div>
 
   <button
@@ -188,6 +175,9 @@ const total = cart.reduce((acc, item) => {
           </h1>
 <div className="flex items-center justify-center gap-3 mb-8">
 
+<p className="text-zinc-300 text-lg md:text-xl mb-8">
+            Productos virales para transformar tu carro.
+          </p>
   <a
     href="https://instagram.com/TUUSUARIO"
     target="_blank"
@@ -207,9 +197,6 @@ const total = cart.reduce((acc, item) => {
   </a>
 
 </div>
-          <p className="text-zinc-300 text-lg md:text-xl mb-8">
-            Productos virales para transformar tu carro.
-          </p>
 
           <button
   onClick={() => {
