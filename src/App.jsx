@@ -30,7 +30,7 @@ export default function DropshippingStoreStarter() {
     {
       id: 2,
       name: "HydroClean 16PZ Pro",
-      price: "$349 MXN",
+      price: "$249 MXN",
 
       fit: "contain",
 
@@ -51,7 +51,7 @@ export default function DropshippingStoreStarter() {
     {
       id: 3,
       name: "SportDrive™ Pedal Kit",
-      price: "$199 MXN",
+      price: "$149 MXN",
 
        image: "/pedal3.png",
 
@@ -90,13 +90,36 @@ export default function DropshippingStoreStarter() {
   trend: true,
   stock: "Stock limitado"
     },
+
+     {
+      id: 5,
+      name: "Kit de lavado para auto",
+      price: "$399 MXN",
+
+      fit: "contain",
+
+      image: "pistola1.jpg", 
+        
+
+      gallery: [
+        "pistola1.jpg", 
+        "pistola2.jpg", 
+        "pistola3.jpg", 
+      
+      ],
+
+      description: "Haz que tu carro quede como recién lavado en minutos.",      
+      shipping: "Envío de 7–12 días",
+  trend: true,
+  stock: "Hoy a solo $299 MXN"
+    },
+
     ];
-
-
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [cart, setCart] = useState([]);
 const [showCart, setShowCart] = useState(false);
 const [checkoutOpen, setCheckoutOpen] = useState(false);
+const [paymentMethod, setPaymentMethod] = useState("paypal");
   const [selectedImage, setSelectedImage] = useState("");
   const [quantity, setQuantity] = useState(1);
   const [zoom, setZoom] = useState(false);
@@ -543,12 +566,56 @@ const total = cart.reduce((acc, item) => {
 
                   <div>
   <p className="text-zinc-400">
-    {item.price}
+    $
+{parseInt(item.price.replace(/\D/g, "")) * item.quantity}
+MXN
   </p>
 
-  <p className="text-zinc-500">
-    Cantidad: {item.quantity}
-  </p>
+  <div className="flex items-center gap-3 mt-3">
+
+  <button
+    onClick={() => {
+      setCart((prev) =>
+        prev.map((cartItem) =>
+          cartItem.id === item.id
+            ? {
+                ...cartItem,
+                quantity:
+                  cartItem.quantity > 1
+                    ? cartItem.quantity - 1
+                    : 1,
+              }
+            : cartItem
+        )
+      );
+    }}
+    className="bg-zinc-800 w-8 h-8 rounded-lg text-lg"
+  >
+    -
+  </button>
+
+  <span className="font-bold text-lg">
+    {item.quantity}
+  </span>
+
+  <button
+    onClick={() => {
+      setCart((prev) =>
+        prev.map((cartItem) =>
+          cartItem.id === item.id
+            ? {
+                ...cartItem,
+                quantity: cartItem.quantity + 1,
+              }
+            : cartItem
+        )
+      );
+    }}
+    className="bg-zinc-800 w-8 h-8 rounded-lg text-lg"
+  >
+    +
+  </button>
+</div>
 </div>
                 </div>
 
@@ -641,79 +708,139 @@ const total = cart.reduce((acc, item) => {
         />
 
         {/* PAGOS */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {/* PAGOS */}
+<div className="mt-10">
 
-  <button className="bg-zinc-900 border border-zinc-700 p-5 rounded-2xl hover:border-white transition text-left">
-    <div className="text-xl font-bold">
-      PayPal
-    </div>
+  <h3 className="text-2xl font-black mb-5">
+    Método de pago seguro
+  </h3>
 
-    <p className="text-zinc-400 text-sm mt-1">
-      Pago rápido y seguro
-    </p>
-  </button>
+  <div className="space-y-4">
 
-  <button className="bg-zinc-900 border border-zinc-700 p-5 rounded-2xl hover:border-white transition text-left">
-    <div className="text-xl font-bold">
-      Añadir una tarjeta nueva
-    </div>
+    {/* PAYPAL */}
+    <button
+      onClick={() => setPaymentMethod("paypal")}
+      className={`w-full p-5 rounded-3xl border transition ${
+        paymentMethod === "paypal"
+          ? "border-blue-500 bg-blue-500/10"
+          : "border-zinc-700 bg-zinc-900"
+      }`}
+    >
+      <div className="flex items-center justify-between">
 
-    <p className="text-zinc-400 text-sm mt-1">
-      Visa, Mastercard, AMEX
-    </p>
-  </button>
+        <div className="text-left">
+          <h4 className="text-2xl font-black">
+            PayPal
+          </h4>
 
-  <button className="bg-zinc-900 border border-zinc-700 p-5 rounded-2xl hover:border-white transition text-left">
-    <div className="text-xl font-bold">
-      Mercado Pago
-    </div>
+          <p className="text-zinc-400 mt-1">
+            Pago rápido y protegido
+          </p>
+        </div>
 
-    <p className="text-zinc-400 text-sm mt-1">
-      Paga con saldo o tarjeta
-    </p>
-  </button>
+        <div className="text-right">
+          <div className="text-4xl">
+            🔵
+          </div>
 
-  <button className="bg-zinc-900 border border-zinc-700 p-5 rounded-2xl hover:border-white transition text-left">
-    <div className="text-xl font-bold">
-      OXXO Pay
-    </div>
+          {paymentMethod === "paypal" && (
+            <p className="text-blue-400 text-sm mt-2 font-bold">
+              Seleccionado
+            </p>
+          )}
+        </div>
 
-    <p className="text-zinc-400 text-sm mt-1">
-      Paga en efectivo en OXXO
-    </p>
-  </button>
+      </div>
+    </button>
 
-  <button className="bg-zinc-900 border border-zinc-700 p-5 rounded-2xl hover:border-white transition text-left md:col-span-2">
-    <div className="text-xl font-bold">
-      Google Pay
-    </div>
+    {/* MERCADO PAGO */}
+    <button
+      onClick={() => setPaymentMethod("mercadopago")}
+      className={`w-full p-5 rounded-3xl border transition ${
+        paymentMethod === "mercadopago"
+          ? "border-sky-400 bg-sky-400/10"
+          : "border-zinc-700 bg-zinc-900"
+      }`}
+    >
+      <div className="flex items-center justify-between">
 
-    <p className="text-zinc-400 text-sm mt-1">
-      Pago rápido desde Android
-    </p>
-  </button>
+        <div className="text-left">
+          <h4 className="text-2xl font-black">
+            Mercado Pago
+          </h4>
 
-</div>
-<div className="mt-8 space-y-4">
+          <p className="text-zinc-400 mt-1">
+            Tarjeta, SPEI y meses
+          </p>
+        </div>
 
-  <input
-    placeholder="Número de tarjeta"
-    className="w-full bg-zinc-900 border border-zinc-700 rounded-2xl p-4"
-  />
+        <div className="text-right">
+          <div className="text-4xl">
+            🟦
+          </div>
 
-  <div className="grid grid-cols-2 gap-4">
+          {paymentMethod === "mercadopago" && (
+            <p className="text-sky-400 text-sm mt-2 font-bold">
+              Seleccionado
+            </p>
+          )}
+        </div>
 
-    <input
-      placeholder="MM/AA"
-      className="w-full bg-zinc-900 border border-zinc-700 rounded-2xl p-4"
-    />
+      </div>
+    </button>
 
-    <input
-      placeholder="CVV"
-      className="w-full bg-zinc-900 border border-zinc-700 rounded-2xl p-4"
-    />
+    {/* OXXO */}
+    <button
+      onClick={() => setPaymentMethod("oxxo")}
+      className={`w-full p-5 rounded-3xl border transition ${
+        paymentMethod === "oxxo"
+          ? "border-yellow-400 bg-yellow-400/10"
+          : "border-zinc-700 bg-zinc-900"
+      }`}
+    >
+      <div className="flex items-center justify-between">
+
+        <div className="text-left">
+          <h4 className="text-2xl font-black">
+            OXXO Pay
+          </h4>
+
+          <p className="text-zinc-400 mt-1">
+            Paga en efectivo en OXXO
+          </p>
+        </div>
+
+        <div className="text-right">
+          <div className="text-4xl">
+            🟥
+          </div>
+
+          {paymentMethod === "oxxo" && (
+            <p className="text-yellow-400 text-sm mt-2 font-bold">
+              Seleccionado
+            </p>
+          )}
+        </div>
+
+      </div>
+    </button>
 
   </div>
+
+  {/* MENSAJE */}
+  <div className="mt-6 bg-zinc-900 border border-zinc-800 rounded-2xl p-4">
+
+    <p className="text-green-400 font-bold">
+      🔒 Pago 100% seguro
+    </p>
+
+    <p className="text-zinc-400 text-sm mt-2">
+      Tus pagos serán procesados de forma segura mediante plataformas certificadas.
+    </p>
+
+  </div>
+
+
 
   <input
     placeholder="Nombre del titular"
