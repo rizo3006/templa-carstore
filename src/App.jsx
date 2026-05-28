@@ -169,7 +169,7 @@ const total = cart.reduce((acc, item) => {
           className="absolute inset-0 w-full h-full object-cover opacity-40"
         />
 
-        <div className="relative z-10 text-center px-6 max-w-3xl">
+        <div className="flex flex-col items-center gap-3 mb-8">
           <h1 className="text-5xl md:text-7xl font-black tracking-tight mb-6">
             NEXT LEVEL CAR ACCESSORIES
           </h1>
