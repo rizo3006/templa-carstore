@@ -175,7 +175,7 @@ const total = cart.reduce((acc, item) => {
           </h1>
 <div className="flex items-center justify-center gap-3 mb-8">
 
-<p className="text-zinc-300 text-lg md:text-xl mb-8">
+          <p className="text-zinc-300 text-lg md:text-xl mb-8">
             Productos virales para transformar tu carro.
           </p>
   <a
