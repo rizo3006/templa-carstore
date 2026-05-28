@@ -173,16 +173,16 @@ const total = cart.reduce((acc, item) => {
           <h1 className="text-5xl md:text-7xl font-black tracking-tight mb-6">
             NEXT LEVEL CAR ACCESSORIES
           </h1>
-<div className="flex items-center justify-center gap-3 mb-8">
+           <div className="flex flex-col items-center gap-3 mb-8">
 
-          <p className="text-zinc-400 text-lg md:text-xl mb-10">
+          <p className="text-zinc-300 text-lg md:text-xl mb-8">
             Productos virales para transformar tu carro.
           </p>
   
   <a
     href="https://www.instagram.com/its_templa?igsh=anNpdnlsNnJ3eTFh&utm_source=qr"
     target="_blank"
-    className="bg-zinc-900 border border-zinc-800 px-4 py-2 rounded-xl text-sm hover:bg-zinc-800 transition flex items-center gap-2"
+    className="bg-zinc-900 border border-zinc-800 px-5 py-2 rounded-xl text-sm hover:bg-zinc-800 transition flex items-center gap-2"
   >
     <span>📸</span>
     Instagram
@@ -191,7 +191,7 @@ const total = cart.reduce((acc, item) => {
   <a
     href="https://www.tiktok.com/@jlrizo"
     target="_blank"
-    className="bg-zinc-900 border border-zinc-800 px-4 py-2 rounded-xl text-sm hover:bg-zinc-800 transition flex items-center gap-2"
+    className="bg-zinc-900 border border-zinc-800 px-5 py-2 rounded-xl text-sm hover:bg-zinc-800 transition flex items-center gap-2"
   >
     <span>🎵</span>
     TikTok
@@ -217,7 +217,7 @@ const total = cart.reduce((acc, item) => {
   id="productos"
   className="py-20 px-6 max-w-7xl mx-auto"
 >
-        <div className="flex items-center justify-between mb-10">
+        <div className="flex flex-col items-center gap-3 mb-8">
           <h2 className="text-4xl font-black">Productos</h2>
 
           <div className="text-zinc-400">
