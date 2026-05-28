@@ -175,9 +175,10 @@ const total = cart.reduce((acc, item) => {
           </h1>
 <div className="flex items-center justify-center gap-3 mb-8">
 
-          <p className="text-zinc-300 text-lg md:text-xl mb-8">
+          <p className="text-zinc-400 text-lg md:text-xl mb-10">
             Productos virales para transformar tu carro.
           </p>
+  
   <a
     href="https://www.instagram.com/its_templa?igsh=anNpdnlsNnJ3eTFh&utm_source=qr"
     target="_blank"
