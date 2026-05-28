@@ -94,7 +94,7 @@ export default function DropshippingStoreStarter() {
      {
       id: 5,
       name: "Kit de lavado para auto",
-      price: "$299 MXN",
+      price: "$249 MXN",
 
       fit: "contain",
 
@@ -111,7 +111,7 @@ export default function DropshippingStoreStarter() {
       description: "Haz que tu carro quede como recién lavado en minutos.",      
       shipping: "Envío de 7–12 días",
   trend: true,
-  stock: "Hoy a solo $299 MXN"
+  stock: "Hoy a solo $249 MXN"
     },
 
     ];
@@ -149,12 +149,16 @@ const total = cart.reduce((acc, item) => {
 
   <a
     href="https://tiktok.com/@jlrizo45"
-    target="_blank"
     className="bg-white/10 border border-zinc-700 px-4 py-2 rounded-xl hover:border-white transition text-sm font-semibold"
   >
     TikTok ↗
   </a>
-
+<a
+    href="https://www.instagram.com/its_templa?igsh=anNpdnlsNnJ3eTFh&utm_source=qr"
+    className="bg-white/10 border border-zinc-700 px-4 py-2 rounded-xl hover:border-white transition text-sm font-semibold"
+  >
+    Instagram ↗
+  </a>
 </div>
 
   <button
