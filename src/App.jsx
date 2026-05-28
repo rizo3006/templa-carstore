@@ -186,8 +186,7 @@ const total = cart.reduce((acc, item) => {
           <h1 className="text-5xl md:text-7xl font-black tracking-tight mb-6">
             NEXT LEVEL CAR ACCESSORIES
           </h1>
-
-          <div className="flex items-center justify-center gap-3 mb-8">
+<div className="flex items-center justify-center gap-3 mb-8">
 
   <a
     href="https://instagram.com/TUUSUARIO"
@@ -208,6 +207,9 @@ const total = cart.reduce((acc, item) => {
   </a>
 
 </div>
+          <p className="text-zinc-300 text-lg md:text-xl mb-8">
+            Productos virales para transformar tu carro.
+          </p>
 
           <button
   onClick={() => {
