@@ -141,9 +141,21 @@ const total = cart.reduce((acc, item) => {
     {/* NAVBAR */}
 <div className="fixed top-0 left-0 w-full z-50 bg-black/70 backdrop-blur border-b border-zinc-800 px-6 py-4 flex items-center justify-between">
 
+  <div className="flex items-center gap-4">
+
   <h1 className="text-2xl font-black">
     NextDrive™
   </h1>
+
+  <a
+    href="https://tiktok.com/@jlrizo45"
+    target="_blank"
+    className="bg-white/10 border border-zinc-700 px-4 py-2 rounded-xl hover:border-white transition text-sm font-semibold"
+  >
+    TikTok ↗
+  </a>
+
+</div>
 
   <button
     onClick={() => setShowCart(true)}
