@@ -179,7 +179,7 @@ const total = cart.reduce((acc, item) => {
             Productos virales para transformar tu carro.
           </p>
   <a
-    href="https://instagram.com/TUUSUARIO"
+    href="https://www.instagram.com/its_templa?igsh=anNpdnlsNnJ3eTFh&utm_source=qr"
     target="_blank"
     className="bg-zinc-900 border border-zinc-800 px-4 py-2 rounded-xl text-sm hover:bg-zinc-800 transition flex items-center gap-2"
   >
@@ -188,7 +188,7 @@ const total = cart.reduce((acc, item) => {
   </a>
 
   <a
-    href="https://tiktok.com/@TUUSUARIO"
+    href="https://www.tiktok.com/@jlrizo"
     target="_blank"
     className="bg-zinc-900 border border-zinc-800 px-4 py-2 rounded-xl text-sm hover:bg-zinc-800 transition flex items-center gap-2"
   >
