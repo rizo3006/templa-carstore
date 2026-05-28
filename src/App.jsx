@@ -876,16 +876,32 @@ MXN
           <span>${total} MXN</span>
         </div>
 
-        <a
-          href={`https://wa.me/5213320354661?text=Hola,%20quiero%20hacer%20un%20pedido%20de:%20${cart
-            .map((item) => `${item.name} x${item.quantity}`)
-            .join(", ")}`}
-          target="_blank"
-          className="block text-center bg-green-500 text-white py-5 rounded-2xl font-black text-xl hover:scale-105 transition"
-        >
-          Confirmar pedido por WhatsApp. Enviaremos un mensaje con los detalles de tu pedido para coordinar la entrega y el pago.
-        </a>
+        <a          
+  href={`https://wa.me/5213320354661?text=
+🛒 NUEVO PEDIDO%0A%0A
+👤 Nombre: ${nombre}%0A
+📞 Teléfono: ${telefono}%0A
+📍 Dirección: ${direccion}%0A
+🏙️ Ciudad: ${ciudad}%0A
+📮 CP: ${cp}%0A
+🪪 RFC/CURP: ${rfc}%0A%0A
 
+💳 Método de pago: ${paymentMethod}%0A%0A
+
+📦 Productos:%0A
+${cart
+  .map(
+    (item) =>
+      `• ${item.name} x${item.quantity} - ${item.price}`
+  )
+  .join("%0A")}%0A%0A
+
+💰 TOTAL: $${total} MXN`}
+  target="_blank"
+  className="block text-center bg-green-500 text-white py-5 rounded-2xl font-black text-xl hover:scale-105 transition"
+>
+  Confirmar pedido por WhatsApp
+</a>          
       </div>
     </div>
   </div>
