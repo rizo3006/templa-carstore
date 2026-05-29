@@ -21,7 +21,6 @@ export default function DropshippingStoreStarter() {
       description:
         "Convierte el interior de tu carro en una experiencia premium.",
         description: "Convierte el interior de tu carro en una experiencia premium.",
-  shipping: "Envío de 7–12 días",
   trend: true,
   stock: "Stock limitado"
 
@@ -43,7 +42,6 @@ export default function DropshippingStoreStarter() {
       ],
 
       description: "Kit completo de limpieza profesional para autos.",
-      shipping: "Envío de 7–12 días",
   trend: true,
   stock: "Stock limitado"
     },
@@ -64,7 +62,6 @@ export default function DropshippingStoreStarter() {
 
       description:
         "Aspiradora portátil potente y compacta para tu coche.",
-        shipping: "Envío de 7–12 días",
   trend: true,
   stock: "Stock limitado"
     },
@@ -85,8 +82,7 @@ export default function DropshippingStoreStarter() {
         
       ],
 
-      description: "Kit completo de limpieza profesional para autos.",
-      shipping: "Envío de 7–12 días",
+      description: "Kit completo de limpieza profesional para autos.",     
   trend: true,
   stock: "Stock limitado"
     },
